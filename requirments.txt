@@ -1,0 +1,4 @@
+requests
+pandas
+scikit-learn
+joblib
