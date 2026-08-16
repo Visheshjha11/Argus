@@ -102,9 +102,11 @@ def extract_features(asteroid):
     )
 
     diameter_max = (
+
         asteroid["estimated_diameter"]
         ["meters"]
         ["estimated_diameter_max"]
+        
     )
 
     diameter = (
