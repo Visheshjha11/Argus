@@ -87,7 +87,7 @@ The model learns relationships between these features and NASA's existing hazard
                          │
                          ▼
               ┌─────────────────────┐
-              │ Data Preparation     │
+              │ Data Preparation    │
               │                     │
               │ Train / Test Split  │
               │ 80% / 20%           │

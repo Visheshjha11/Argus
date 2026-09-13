@@ -66,6 +66,7 @@ def fetch_window(start_date, end_date):
 
     response.raise_for_status()
 
+
     return response.json()
 
 
@@ -178,6 +179,7 @@ def extract_records(data):
                     asteroid.get(
                         "absolute_magnitude_h"
                     ),
+
 
                 "hazardous":
                     int(
