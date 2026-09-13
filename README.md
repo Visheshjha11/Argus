@@ -71,8 +71,8 @@ The model learns relationships between these features and NASA's existing hazard
                          │
                          ▼
               ┌─────────────────────┐
-              │   Data Collection    │
-              │  Historical / Live   │
+              │   Data Collection   │
+              │  Historical / Live  │
               └──────────┬──────────┘
                          │
                          ▼
@@ -120,7 +120,7 @@ The model learns relationships between these features and NASA's existing hazard
                          ▼
               ┌─────────────────────┐
               │ ML Risk Probability │
-              │ + NASA Classification│
+              │+ NASA Classification│
               └──────────┬──────────┘
                          │
                          ▼
