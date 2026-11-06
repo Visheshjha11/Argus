@@ -1,0 +1,144 @@
+{
+  "meta": {
+    "trained_utc": "2026-11-06T10:57:54+00:00",
+    "sklearn_version": "1.9.1",
+    "rows": 72701,
+    "asteroids": 20300,
+    "hazardous_rate": 0.09570707418054772,
+    "rf_params": {
+      "n_estimators": 200,
+      "max_depth": 8,
+      "min_samples_split": 4,
+      "class_weight": "balanced"
+    },
+    "seed": 42,
+    "note": "Metrics come from the 80% model evaluated on 20% unseen asteroids; the shipped model is refit on 100% of the data."
+  },
+  "data_report": {
+    "rows_raw": 72730,
+    "dropped_legacy_rows": 29,
+    "dropped_invalid_rows": 0,
+    "dropped_duplicate_rows": 0,
+    "asteroids_with_inconsistent_label": 0,
+    "rows_clean": 72701,
+    "unique_asteroids": 20300,
+    "hazardous_rate": 0.09570707418054772,
+    "date_min": "2000-01-01",
+    "date_max": "2026-09-08"
+  },
+  "holdout": {
+    "accuracy": 0.921251719394773,
+    "balanced_accuracy": 0.6157469667324011,
+    "precision": 0.7956730769230769,
+    "recall": 0.23795830337886412,
+    "f1": 0.3663530713890426,
+    "mcc": 0.40843600752274833,
+    "roc_auc": 0.9370741278185291,
+    "pr_auc": 0.6114815751929158,
+    "brier": 0.054155025011825064,
+    "ece": 0.006538517988871086,
+    "confusion": [
+      [
+        13064,
+        85
+      ],
+      [
+        1060,
+        331
+      ]
+    ]
+  },
+  "grouped_cv": {
+    "roc_auc": {
+      "mean": 0.9296094726139096,
+      "std": 0.004291513724705735
+    },
+    "pr_auc": {
+      "mean": 0.5762209677544486,
+      "std": 0.012331234416822212
+    },
+    "f1": {
+      "mean": 0.50028941117703,
+      "std": 0.010049689483606685
+    },
+    "recall": {
+      "mean": 0.9793440020905215,
+      "std": 0.0051676586776486485
+    }
+  },
+  "baselines": {
+    "majority_class": {
+      "accuracy": 0.9043328748280606,
+      "recall": 0.0
+    },
+    "single_pass_pha_rule": {
+      "accuracy": 0.9156808803301238,
+      "precision": 0.9824561403508771,
+      "recall": 0.1207764198418404,
+      "f1": 0.21510883482714468
+    }
+  },
+  "operating_points": [
+    {
+      "threshold": 0.1,
+      "flagged": 4086,
+      "precision": 0.3352912383749388,
+      "recall": 0.9849029475197699,
+      "f1": 0.5002738725579697
+    },
+    {
+      "threshold": 0.2,
+      "flagged": 3788,
+      "precision": 0.3492608236536431,
+      "recall": 0.9511143062544932,
+      "f1": 0.5109094419772157
+    },
+    {
+      "threshold": 0.3,
+      "flagged": 1981,
+      "precision": 0.4684502776375568,
+      "recall": 0.6671459381739756,
+      "f1": 0.5504151838671412
+    },
+    {
+      "threshold": 0.4,
+      "flagged": 734,
+      "precision": 0.6716621253405994,
+      "recall": 0.35442127965492454,
+      "f1": 0.464
+    },
+    {
+      "threshold": 0.5,
+      "flagged": 416,
+      "precision": 0.7956730769230769,
+      "recall": 0.23795830337886412,
+      "f1": 0.3663530713890426
+    }
+  ],
+  "risk_bands": {
+    "LOW (<40)": {
+      "count": 13806,
+      "observed_hazardous_rate": 0.06504418368825149,
+      "mean_predicted": 0.06846989330691455
+    },
+    "MEDIUM (40-74.99)": {
+      "count": 481,
+      "observed_hazardous_rate": 0.553014553014553,
+      "mean_predicted": 0.5001975016244932
+    },
+    "HIGH (>=75)": {
+      "count": 253,
+      "observed_hazardous_rate": 0.8972332015810277,
+      "mean_predicted": 0.9204024302614294
+    }
+  },
+  "feature_importance": {
+    "magnitude": 0.3703885637564988,
+    "log_diameter_m": 0.3569298768495662,
+    "log_energy_mt": 0.18831862909688976,
+    "velocity_kms": 0.03470878649461056,
+    "log_miss_over_pha": 0.019002151791983883,
+    "log_miss_ld": 0.018862088362958964,
+    "pha_single_pass": 0.011789903647491842
+  }
+}

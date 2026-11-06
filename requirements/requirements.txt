@@ -1,0 +1,6 @@
+requests>=2.31
+numpy>=1.26
+pandas>=2.2
+python-dotenv>=1.0
+joblib>=1.4
+scikit-learn==1.9.1

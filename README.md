@@ -269,14 +269,16 @@ This provides visibility into both overall performance and class-level behavior.
 Argus/
 │
 │
-├── collect_dataset.py
-├── train.py
-├── predict.py
+├── collect_dataset.py     # builds nasa_neo_dataset.csv from the NASA feed
+├── argus_core.py          # features, model bundle I/O, explanations (shared)
+├── train.py               # trains + evaluates; never calls the API
+├── predict.py             # live inference with per-asteroid reasoning
 │
 ├── nasa_neo_dataset.csv
 ├── argus_model.pkl
+├── argus_metrics.json     # written by train.py
 │
-├── requirments.txt
+├── requirements.txt
 ├── .gitignore
 └── README.md
 ```
@@ -312,7 +314,7 @@ source .venv/bin/activate
 ### Install Dependencies
 
 ```bash
-pip install -r requirments.txt
+pip install -r requirements.txt
 ```
 
 ---
@@ -390,6 +392,52 @@ NASA NEO data provides the observational attributes used by Argus for dataset co
 For more information, visit the official NASA API documentation.
 
 https://api.nasa.gov/
+
+---
+
+## Measured Results
+
+Numbers below come from `python train.py` on the committed dataset
+(72,701 approaches, 20,300 unique asteroids, 9.57% hazardous). The test set is
+20% of **asteroids** (not rows); no asteroid appears in both train and test.
+Full output is in `argus_metrics.json`.
+
+| Metric (held-out)  | Value  |
+| ------------------ | -----: |
+| ROC-AUC            | 0.937  |
+| PR-AUC             | 0.612 (chance 0.096) |
+| Accuracy           | 92.1% (majority-class baseline 90.4%) |
+| Calibration error  | 0.0065 |
+
+Risk bands are calibrated: objects scored below 40 were NASA-flagged 6.5% of
+the time, 40-75 flagged 55%, and 75+ flagged 90%.
+
+### Known ceiling
+
+NASA's label is defined by MOID (<= 0.05 AU) and H (<= 22). MOID is an orbital
+property and is not in the NeoWs feed. For objects that are large enough but
+pass far from Earth on the observed approach (28% of rows, 29% hazardous), the
+model separates classes at only AUC 0.69. Swapping to gradient boosting or
+adding more derived features did not change this. The way past it is more
+information: orbital elements (eccentricity, semi-major axis, inclination,
+perihelion) from the NeoWs lookup endpoint.
+
+---
+
+## Explanations
+
+Every prediction includes sectioned reasoning:
+
+* **NASA criteria**: size vs H <= 22 and miss distance vs 0.05 AU, with the
+  diameter uncertainty range
+* **Impact severity context**: velocity and size percentiles, hypothetical
+  impact energy with Hiroshima / Chelyabinsk / Tunguska comparison
+* **What drove the ML score**: exact Shapley attribution over Size, Speed and
+  Distance, in percentage points relative to the population baseline
+* **Verdict**: whether NASA and the model agree, and what to do when they do not
+
+Velocity is shown as severity context, not as a hazard driver: it is not part
+of NASA's definition and the model assigns it little weight.
 
 ---
 

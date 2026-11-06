@@ -1,4 +1,15 @@
-.env
+# Environment files
 .env
 .env.*
-!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+
+# Virtual environment
+.venv/
+venv/
+env/
+
+# Unrequired scripts
+fun/
