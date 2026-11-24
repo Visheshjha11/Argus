@@ -1,23 +1,5 @@
 # train.py
-"""
-Train the Argus hazard-probability model from the dataset built by
-collect_dataset.py. Does NOT call the NASA API and does NOT overwrite the
-dataset (the previous version did both).
 
-Method
-------
-* Model: RandomForestClassifier with the README hyperparameters
-  (200 trees, depth 8, min_samples_split 4, balanced class weights).
-* Split: 80/20, stratified AND grouped by asteroid_id. The CSV holds many
-  close approaches per asteroid and the label is constant per asteroid, so a
-  plain random split puts the same object in train and test and inflates
-  every metric.
-* Probabilities: isotonic calibration on grouped inner folds. class_weight=
-  "balanced" otherwise skews predict_proba upward, which would corrupt the
-  0-100 risk score and its 40/75 thresholds.
-* Reported against two baselines: majority class and the literal PHA rule
-  applied to this single observation.
-"""
 
 import argparse
 import json

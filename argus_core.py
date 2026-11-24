@@ -1,14 +1,3 @@
-"""
-argus_core.py
-
-Single source of truth for everything train.py and predict.py must agree on:
-feature engineering, model-bundle I/O, and per-asteroid explanations.
-
-The previous code duplicated feature extraction in three files and used
-different diameter units in each (km in collect_dataset.py, m in train.py and
-predict.py). Anything that touches raw NASA fields now goes through here.
-"""
-
 from __future__ import annotations
 
 import itertools
